@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Todo</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<h1>Todo list</h1>
+	<h4>1. Take class</h4>
+	<h4 id="eat">2. Go out to eat</h4>
+	<div>
+		<input type="text"></input>
+		<button>Add Todo</button>
+	</div>
+	<script>
+		const button = document.querySelector("button")
+		button.addEventListener("click", function(){
+			const input = document.querySelector("input")
+			console.log(input.value);
+		})
+
+		let i= 0
+		setInterval(() => {
+			document.querySelector("#eat").textContent = `${i}. Go out to eat `
+			i++
+		}, 1000);
+        console.log(document.querySelector("h1").innerHTML);
+        
+		
+	</script>
+</body>
+
+</html>

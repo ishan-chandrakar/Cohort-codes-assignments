@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo-app</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        span {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My tasks</h1>
+
+    <div class="my-tasks">
+        <div id="task-1">
+            <span>⬜ Eat</span>
+            <button onclick="deleteTask(1)">Delete</button>
+        </div>
+
+        <div id="task-2">
+            <span>⬜ Sleep</span>
+            <button onclick="deleteTask(2)">Delete</button>
+        </div>
+    </div>
+
+    <input type="text" name="" id="" />
+    <button onclick="addTask()">Add Task</button>
+
+</body>
+
+<script>
+    let i = 3;
+    function addTask() {
+        let newTask = document.querySelector("input").value;
+        let newDiv = document.createElement("div");
+        newDiv.innerHTML = `<span>⬜  ${newTask}</span> <button onclick="deleteTask(${i})">Delete</button>`;
+        newDiv.setAttribute("id", `task-${i}`);
+
+        document.querySelector(".my-tasks").appendChild(newDiv);
+        i++;
+    }
+
+    function deleteTask(n){
+        let delTask = document.querySelector(`#task-${n}`)
+        delTask.parentNode.removeChild(delTask)
+    }
+</script>
+
+</html>
