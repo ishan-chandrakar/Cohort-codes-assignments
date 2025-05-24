@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quiz-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .option {
+      display: block;
+      margin: 10px 0;
+    }
+    #submit {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #submit:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container" id="quiz">
+    <h2 id="question">Question text</h2>
+    <label class="option"><input type="radio" name="answer" value="a" /> <span id="a_text">Option A</span></label>
+    <label class="option"><input type="radio" name="answer" value="b" /> <span id="b_text">Option B</span></label>
+    <label class="option"><input type="radio" name="answer" value="c" /> <span id="c_text">Option C</span></label>
+    <label class="option"><input type="radio" name="answer" value="d" /> <span id="d_text">Option D</span></label>
+    <button id="submit">Submit</button>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-preview</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .builder,
+        .preview {
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 700px;
+            padding: 0 20px 20px 20px;
+            background-color: rgb(157, 144, 144);
+        }
+
+        .builder>input {
+            width: 100%;
+            height: 20px;
+        }
+
+        .builder>button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="builder">
+            <h1>Form Builder</h1>
+            <h2>Select Field Type</h2>
+
+            <select name="fieldType" id="fieldType">
+                <option value="input">Input</option>
+                <option value="checkbox">Checkbox</option>
+                <option value="radio">Radio</option>
+            </select>
+
+            <h2>Field Label</h2>
+            <input type="text" placeholder="Enter field label" id="fieldLabel">
+
+            <button onclick="addField()">Add Field</button>
+        </div>
+
+        <div class="preview">
+            <h1>Form Preview</h1>
+        </div>
+    </div>
+</body>
+
+<script>
+    let count = 1
+    function addField() {
+        let fieldType = document.querySelector("#fieldType").value
+        let fieldLabel = document.querySelector("#fieldLabel").value
+
+        let newField = document.createElement("div")
+
+        if (fieldType == "input") {
+            newField.innerHTML = `<label for="${count}">${fieldLabel}</label>
+            <input type="${fieldType}" id="${count}">`
+        }
+        else {
+            newField.innerHTML = `<input type="${fieldType}" id="${count}">
+            <label for="${count}">${fieldLabel}</label>`
+        }
+
+        document.querySelector(".preview").appendChild(newField)
+
+
+        count++
+    }
+</script>
+
+</html>

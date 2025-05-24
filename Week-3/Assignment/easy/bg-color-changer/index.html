@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+
+        body{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        #colors>button{
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 18px;
+        }
+        #hexColor *, #colorName *{
+            padding: 5px;
+            font-size: 18px;
+        }
+        #red{
+            background-color: red;
+        }
+        #yellow{
+            background-color: yellow;
+        }
+        #black{
+            background-color: black;
+        }
+        #purple{
+            background-color: purple;
+        }
+        #green{
+            background-color: green;
+        }
+        #blue{
+            background-color: blue;
+        }
+        #default{
+            background-color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="colors">
+        <button id="red" onclick="bgChange(this.id)">Red</button>
+        <button id="yellow" onclick="bgChange(this.id)">Yellow</button>
+        <button id="black" onclick="bgChange(this.id)">Black</button>
+        <button id="purple" onclick="bgChange(this.id)">Purple</button>
+        <button id="green" onclick="bgChange(this.id)">Green</button>
+        <button id="blue" onclick="bgChange(this.id)">Blue</button>
+        <button id="white" onclick="bgChange(this.id)">Default</button>
+    </div>
+    <div id="hexColor">
+        <input type="text" placeholder="Input the hexcode" id="hexCode">
+        <button onclick="hexColor()">Change Color</button>
+    </div>
+    <div id="colorName">
+        <input type="text" placeholder="Input the color name" id="nameOfColor">
+        <button onclick="colorName()">Change Color</button>
+    </div>
+</body>
+
+
+<script>
+
+    function hexColor(){
+        let color = document.querySelector("#hexCode").value
+        let body = document.querySelector("body")
+        body.style.backgroundColor = color
+    }
+
+    function colorName(){
+        let color = document.querySelector("#nameOfColor").value
+        let body = document.querySelector("body")
+        body.style.backgroundColor = color
+    }
+    
+    function bgChange(id){
+        let body = document.querySelector("body")
+        body.style.backgroundColor = id
+    }
+</script>
+</html>

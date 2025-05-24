@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pokemon Cards</title>
+		<style>
+			body {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+			}
+
+			.cards {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
+			}
+
+			.cards > div {
+				border: 2px solid black;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Pokemon Cards</h1>
+
+		<input type="number" name="" id="" />
+		<button onclick="submit()">Submit</button>
+
+		<div class="cards"></div>
+	</body>
+
+	<script>
+		function submit() {
+			let noofCards = document.querySelector("input").value;
+
+			if (noofCards > 0) {
+				for (let i = 1; i <= noofCards; i++) {
+					let card = document.createElement("div");
+					let cardName = document.createElement("h2");
+					let cardImage = document.createElement("div");
+
+					fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+						.then((response) => response.json())
+						.then((data) => {
+							cardName.innerText = data.forms[0].name;
+							let imagUrl = data.sprites["back_default"];
+							cardImage.innerHTML = `<img src="${imagUrl}" height="200px">`;
+							// cardImage.setAttribute("src", imagUrl)
+
+							card.appendChild(cardName);
+							card.appendChild(cardImage);
+
+							document.querySelector(".cards").appendChild(card);
+						});
+				}
+			} else {
+				alert("enter positive value");
+			}
+		}
+	</script>
+</html>
