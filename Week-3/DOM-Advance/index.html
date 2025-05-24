@@ -1,0 +1,31 @@
+<body>
+    <input type="text">
+    <button onclick="addTodo()">Add Todo</button>
+
+    <script>
+        let todos = []
+        function addTodo() {
+            todos.push({
+                title: document.querySelector("input").value
+            })
+            render()
+        }
+
+        function render() {
+            let newTask = document.createElement("div")
+            let taskName = document.createElement("div")
+            let deleteBtn = document.createElement("button")
+
+            taskName.innerText = todos[todos.length - 1].title
+            deleteBtn.textContent = "Delete"
+            
+            
+            newTask.appendChild(taskName)
+            newTask.appendChild(deleteBtn)
+            document.querySelector("body").appendChild(newTask)
+            deleteBtn.addEventListener("click", function(){
+                newTask.remove()
+            })
+        }
+    </script>
+</body>
