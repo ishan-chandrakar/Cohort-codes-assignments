@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Website</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <script>
+        async function signup() {
+            const username = document.querySelector("#signup-username").value
+            const password = document.querySelector("#signup-password").value
+
+            const response = await axios.post("http://localhost:3000/signup", {
+                username: username,
+                password: password
+            })
+
+            if (response.data == "Signed-Up") {
+
+                alert("You are signed up")
+
+                let signupDiv = document.querySelector("#signup")
+                let signinDiv = document.querySelector("#signin")
+                // let information = document.querySelector("#information")
+                // let logout = document.querySelector("#logout")
+                signupDiv.style.display = "none"
+                signinDiv.style.display = "block"
+                // information.style.display = "block"
+                // logout.style.display = "block"
+            }
+            else{
+                alert("Incorrect credentials")
+            }
+        }
+
+        async function signin() {
+            const username = document.querySelector("#signin-username").value
+            const password = document.querySelector("#signin-password").value
+
+            const response = await axios.post("http://localhost:3000/signin", {
+                username: username,
+                password: password
+            })
+            localStorage.setItem("token", response.data.token)
+            alert("Token generated")
+        }
+
+        async function getUserInformation() {
+            const response = await axios.get("http://localhost:3000/me", {
+                headers: {
+                    token: localStorage.getItem("token")
+                }
+            })
+            document.querySelector("#information").innerHTML = `Username : ${response.data.username} & password = ${response.data.password}`
+        }
+        getUserInformation()
+
+        function logout() {
+            localStorage.removeItem("token")
+        }
+    </script>
+    <style>
+        #signin,
+        #information,
+        #logout {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="signup">
+        SignUp
+        <input type="text" placeholder="Username" name="username" id="signup-username">
+        <input type="password" placeholder="password" name="password" id="signup-password">
+        <button onclick="signup()">Submit</button>
+    </div>
+
+    <div id="signin">
+        Signin
+        <input type="text" name="username" placeholder="Username" id="signin-username">
+        <input type="password" name="password" placeholder="Password" id="signin-password">
+        <button onclick="signin()">Submit</button>
+    </div>
+
+    <div id="information">
+        User information:
+        <div id="information"></div>
+    </div>
+
+    <div id="logout">
+        <button onclick="logout()">Logout</button>
+    </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
