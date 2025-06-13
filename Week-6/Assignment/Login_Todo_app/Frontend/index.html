@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login based Todo App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="signUp">
+        <h1>SignUp</h1>
+        <div class="username">
+            <label for="signup-username">Username</label>  
+            <input type="text" name="signup-username" id="signup-username" placeholder="username">
+        </div>
+        <div class="password">
+            <label for="signup-password">Password</label>
+            <input type="password" name="signup-password" id="signup-password" placeholder="password">
+        </div>
+
+        <button onclick="signUp()">Submit</button>
+    </div>
+
+    <div id="signIn">
+        <h1>SignIn</h1>
+        <div class="username">
+            <label for="signin-username">Username</label>  
+            <input type="text" name="signin-username" id="signin-username" placeholder="username">
+        </div>
+        <div class="password">
+            <label for="signin-password">Password</label>
+            <input type="password" name="signin-password" id="signin-password" placeholder="password">
+        </div>
+
+        <button onclick="signIn()">Submit</button>
+    </div>
+
+    <div id="myTasks">
+        <h1>My Todos</h1>
+        <input type="text" name="todo" id="task">
+        <button onclick="addTodo()">Add todo</button>
+    </div>
+
+
+    <script src="./index.js"></script>
+</body>
+</html>
