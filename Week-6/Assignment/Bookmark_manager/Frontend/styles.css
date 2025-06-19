@@ -1,0 +1,89 @@
+body {
+	/*start here  */
+	background-color: #222831;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+	/*start here  */
+	background-color: #393E46;
+	border-radius: 20px;
+	/* height: 50%; */
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+h1 {
+	/*start here  */
+    color: #FBE4D6;
+    font-size: 35px;
+}
+
+.input-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 10px;
+}
+input{
+    background-color: rgb(172, 159, 159);
+    height: 35px;
+    font-size: 18px;
+    border-radius: 10px;
+    padding-left: 10px;
+    /* outline: none; */
+    border: 0px;
+}
+
+#add-bookmark-btn {
+	/*start here  */
+    background-color: purple;
+    color: white;
+	grid-column: 1 / span 2;
+     height: 45px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+#bookmark-list {
+	/*start here  */
+    list-style: none;
+    width: 100%;
+    padding: 0px;
+}
+
+#bookmark-list li {
+	/*start here  */
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(109, 101, 101);
+    height: 35px;
+    border-radius: 10px;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+}
+
+/* button.favorite-btn {} */
+
+.delete-btn {
+	/*start here  */
+    background-color: red;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.delete-btn:hover {
+  background-color: #af0e0e;
+  cursor: pointer;
+}
