@@ -3,7 +3,9 @@ const app = express();
 const { UserModel, TodoModel } = require("./db");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const env = require("dotenv").config()
+const bcrypt = require("bcrypt");
+const { z } = require("zod");
+const env = require("dotenv").config();
 
 const JWT_key = process.env.JWT_key;
 
@@ -12,31 +14,63 @@ mongoose.connect(process.env.MongoUrl);
 app.use(express.json());
 
 app.post("/signup", async function (req, res) {
+	const requiredBody = z.object({
+		email: z.string().min(5).max(30).email("Invalid email format"),
+		password: z
+			.string()
+			.min(8, { message: "Password should have minimum length of 8" })
+			.max(15, "Password is too long")
+			.regex(/[A-Z]/, "Password must contain atleast one uppercase character")
+			.regex(/[a-z]/, "Password must contain atleast one lowercase character")
+            .regex(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least one special character"),
+		name: z.string().min(1).max(25),
+	});
+
+	const parsedData = requiredBody.safeParse(req.body);
+
+	if (parsedData.error) {
+		res.json({
+			error: parsedData.error.issues
+		});
+	}
+
 	const email = req.body.email;
 	const password = req.body.password;
 	const name = req.body.name;
 
-	await UserModel.create({
-		email: email,
-		password: password,
-		name: name,
-	});
-	res.json({
-		msg: "You are logged in",
-	});
+	try {
+		const hashedPassword = await bcrypt.hash(password, 5);
+
+		await UserModel.create({
+			email: email,
+			password: hashedPassword,
+			name: name,
+		});
+		res.json({
+			msg: "You are logged in",
+		});
+	} catch (error) {
+		res.json({
+			msg: error.message,
+		});
+	}
 });
 
-app.post("/login", async function (req, res) {
+app.post("/signin", async function (req, res) {
 	const email = req.body.email;
 	const password = req.body.password;
 
 	const user = await UserModel.findOne({
 		email: email,
-		password: password,
 	});
-	console.log(user);
+	if (!user) {
+		res.status(403).json({
+			msg: "User doesn't exist",
+		});
+	}
+	const passwordMatch = await bcrypt.compare(password, user.password);
 
-	if (user) {
+	if (passwordMatch) {
 		const token = jwt.sign(
 			{
 				id: user._id,
